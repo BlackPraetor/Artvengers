@@ -58,16 +58,24 @@ def home(request):
 def uploadPage(request):
     return render(request,'upload.html',{})
 
+<<<<<<< Updated upstream
 def post_comment(request, pk):
     print(request.POST)
     post = get_object_or_404(ArtworkPost, pk = request.POST.get('addcommentbutton'))
     
+=======
+def post_comment(request,pk):
+    
+    print(request.POST)
+    post = get_object_or_404(ArtworkPost,pk = request.POST.get('artworkpost_id'))
+
+>>>>>>> Stashed changes
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
            comment = form.save(commit=False)
            comment.post = post
-           comment.save()
+           comment.add()
 
            return HttpResponseRedirect(reverse('artwork_detail',args=[str(pk)]))
 
